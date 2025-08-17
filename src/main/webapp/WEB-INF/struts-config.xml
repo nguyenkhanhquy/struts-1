@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts-config PUBLIC
+	 "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+	 "http://jakarta.apache.org/struts/dtds/struts-config_1_3.dtd">
+
+<struts-config>
+	<form-beans>
+		<form-bean name="user" type="com.learn.struts.model.User" />
+	</form-beans>
+
+	<action-mappings>
+		<action path="/welcome"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/welcome.jsp">
+		</action>
+
+		<action path="/hello" type="com.learn.struts.action.UserAction"
+			name="user">
+			<forward name="success" path="/hello.jsp" />
+		</action>
+
+		<action path="/user"
+			type="com.learn.struts.action.UserDispatchAction" name="user"
+			parameter="method">
+			<forward name="addUser" path="/user/addUser.jsp" />
+			<forward name="viewUser" path="/user/viewUser.jsp" />
+			<forward name="updateUser" path="/user/updateUser.jsp" />
+			<forward name="deleteUser" path="/user/deleteUser.jsp" />
+		</action>
+
+		<action path="/add-user"
+			type="com.learn.struts.action.UserMappingDispatchAction" name="user"
+			parameter="addUser">
+			<forward name="addUser" path="/user/addUser.jsp" />
+		</action>
+		<action path="/update-user"
+			type="com.learn.struts.action.UserMappingDispatchAction" name="user"
+			parameter="updateUser">
+			<forward name="updateUser" path="/user/updateUser.jsp" />
+		</action>
+	</action-mappings>
+</struts-config>
