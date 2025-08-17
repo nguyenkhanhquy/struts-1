@@ -34,6 +34,11 @@
 			parameter="addUser">
 			<forward name="addUser" path="/user/addUser.jsp" />
 		</action>
+		<action path="/view-user"
+			type="com.learn.struts.action.UserMappingDispatchAction" name="user"
+			parameter="viewUser">
+			<forward name="viewUser" path="/user/viewUser.jsp" />
+		</action>
 		<action path="/update-user"
 			type="com.learn.struts.action.UserMappingDispatchAction" name="user"
 			parameter="updateUser">

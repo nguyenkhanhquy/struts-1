@@ -11,13 +11,6 @@ import org.apache.struts.actions.MappingDispatchAction;
 import com.learn.struts.model.User;
 
 public class UserMappingDispatchAction extends MappingDispatchAction {
-
-	@Override
-	protected ActionForward unspecified(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		
-		return viewUser(mapping, form, request, response);
-	}
 	
 	public ActionForward addUser(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
@@ -32,9 +25,12 @@ public class UserMappingDispatchAction extends MappingDispatchAction {
 	public ActionForward viewUser(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		
+		String name = request.getParameter("name");
+		String age = request.getParameter("age");
+		
 		User user = (User) form;
-		user.setName("Hello Struts - View");
-		user.setAge(10);
+		user.setName(name);
+		user.setAge(Integer.valueOf(age));
 		
 		return mapping.findForward("viewUser");
 	}
