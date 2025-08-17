@@ -15,9 +15,9 @@ public class UserMappingDispatchAction extends MappingDispatchAction {
 	public ActionForward addUser(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		
-		User user = (User) form;
-		user.setName("Hello Struts - Add");
-		user.setAge(10);
+//		User user = (User) form;
+//		user.setName("Hello Struts - Add");
+//		user.setAge(10);
 		
 		return mapping.findForward("addUser");
 	}
@@ -25,12 +25,12 @@ public class UserMappingDispatchAction extends MappingDispatchAction {
 	public ActionForward viewUser(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		
-		String name = request.getParameter("name");
-		String age = request.getParameter("age");
-		
-		User user = (User) form;
-		user.setName(name);
-		user.setAge(Integer.valueOf(age));
+//		String name = request.getParameter("name");
+//		String age = request.getParameter("age");
+//		
+//		User user = (User) form;
+//		user.setName(name);
+//		user.setAge(Integer.valueOf(age));
 		
 		return mapping.findForward("viewUser");
 	}

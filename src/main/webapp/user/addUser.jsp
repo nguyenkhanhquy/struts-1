@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean"%>
+<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,5 +17,15 @@
 		
 		<input type="submit" value="Add">
 	</form>
+	
+	<html:form action="/view-user.do" method="post">
+		Name
+		<html:text property="name" name="user"></html:text>
+		
+		Age
+		<html:text property="age" name="user"></html:text>
+		
+		<html:submit>Add</html:submit>
+	</html:form>
 </body>
 </html>
