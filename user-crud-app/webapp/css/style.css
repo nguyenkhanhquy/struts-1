@@ -1,0 +1,75 @@
+/* Thêm vào file CSS hiện tại */
+
+/* User info in header */
+.user-info {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #666;
+}
+
+.user-info strong {
+    color: #007bff;
+}
+
+/* Disabled button style */
+.btn-disabled {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #6c757d;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 12px;
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Session info */
+.session-info {
+    border-left: 4px solid #007bff;
+}
+
+.session-info p {
+    margin: 5px 0;
+}
+
+/* Alert improvements */
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    position: relative;
+}
+
+.alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
+.alert-error {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    header > div {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .user-info {
+        justify-content: center;
+    }
+    
+    .toolbar {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+}

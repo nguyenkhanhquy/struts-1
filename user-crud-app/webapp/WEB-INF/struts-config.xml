@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+
+<struts-config>
+    
+    <!-- Form Beans -->
+    <form-beans>
+        <form-bean name="userForm" type="com.example.form.UserForm"/>
+        <form-bean name="loginForm" type="com.example.form.LoginForm"/>
+    </form-beans>
+    
+    <!-- Action Mappings -->
+    <action-mappings>
+    	<!-- Login Actions -->
+        <action path="/loginShow" 
+                type="org.springframework.web.struts.DelegatingActionProxy"
+                name="loginForm"
+                scope="request">
+            <forward name="success" path="/WEB-INF/jsp/login.jsp"/>
+        </action>
+        
+        <action path="/login" 
+                type="org.springframework.web.struts.DelegatingActionProxy"
+                name="loginForm"
+                scope="request"
+                validate="true"
+                input="/WEB-INF/jsp/login.jsp">
+            <forward name="success" path="/userList.do" redirect="true"/>
+            <forward name="failure" path="/WEB-INF/jsp/login.jsp"/>
+        </action>
+        
+        <action path="/logout" 
+                type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+            <forward name="success" path="/loginShow.do" redirect="true"/>
+        </action>
+        
+        <!-- User Management Actions -->
+        <!-- Hiển thị danh sách users -->
+        <!-- <action path="/userList" 
+                type="com.example.action.UserListAction"
+                scope="request">
+            <forward name="success" path="/WEB-INF/jsp/userList.jsp"/>
+        </action> -->
+         <!-- Action Mappings với Spring DelegatingActionProxy -->
+         <action path="/userList" 
+                type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+            <forward name="success" path="/WEB-INF/jsp/userList.jsp"/>
+        </action>
+        
+        <!-- Hiển thị form tạo user mới -->
+        <action path="/userCreate" 
+                type="com.example.action.UserCreateAction"
+                name="userForm"
+                scope="request">
+            <forward name="success" path="/WEB-INF/jsp/userForm.jsp"/>
+        </action>
+        
+        <!-- Hiển thị form chỉnh sửa user -->
+        <action path="/userEdit" 
+                type="com.example.action.UserEditAction"
+                name="userForm"
+                scope="request">
+            <forward name="success" path="/WEB-INF/jsp/userForm.jsp"/>
+        </action>
+        
+        <!-- Lưu user (tạo mới hoặc cập nhật) -->
+        <action path="/userSave" 
+                type="com.example.action.UserSaveAction"
+                name="userForm"
+                scope="request"
+                validate="true"
+                input="/WEB-INF/jsp/userForm.jsp">
+            <forward name="success" path="/userList.do" redirect="true"/>
+            <forward name="failure" path="/WEB-INF/jsp/userForm.jsp"/>
+        </action>
+        
+        <!-- Xóa user -->
+        <action path="/userDelete" 
+                type="com.example.action.UserDeleteAction"
+                scope="request">
+            <forward name="success" path="/userList.do" redirect="true"/>
+        </action>
+    </action-mappings>
+    
+    <!-- Message Resources -->
+    <message-resources parameter="ApplicationResources"/>
+    
+    <!-- Validator Plugin -->
+    <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+        <set-property property="pathnames" value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml"/>
+    </plug-in>
+    
+</struts-config>

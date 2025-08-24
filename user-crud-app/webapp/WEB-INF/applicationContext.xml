@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+    <!-- DataSource Configuration -->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
+        <property name="url" value="jdbc:sqlserver://localhost:1433;databaseName=UserDB;trustServerCertificate=true"/>
+        <property name="username" value="sa"/>
+        <property name="password" value="password"/>
+    </bean>
+
+    <!-- Hibernate SessionFactory -->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mappingResources">
+            <list>
+                <value>User.hbm.xml</value>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.format_sql">true</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+                <prop key="hibernate.connection.autocommit">false</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!-- DAO Beans -->
+    <bean id="userDAO" class="com.example.dao.impl.UserDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <!-- Service Beans -->
+    <bean id="userService" class="com.example.service.impl.UserServiceImpl">
+        <property name="userDAO" ref="userDAO"/>
+    </bean>
+    
+    <!-- Struts Action Beans với tên mapping tương ứng với path -->
+    <bean name="/userList" class="com.example.action.UserListAction">
+        <property name="userService" ref="userService"/>
+    </bean>
+    
+    <!-- Login Action Beans -->
+    <bean name="/loginShow" class="com.example.action.LoginShowAction">
+        <property name="userService" ref="userService"/>
+    </bean>
+
+    <bean name="/login" class="com.example.action.LoginAction">
+        <property name="userService" ref="userService"/>
+    </bean>
+
+    <bean name="/logout" class="com.example.action.LogoutAction">
+        <property name="userService" ref="userService"/>
+    </bean>
+
+</beans>
